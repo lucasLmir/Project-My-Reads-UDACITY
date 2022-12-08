@@ -1,4 +1,5 @@
 import "./App.css";
+import BookGrid from "./BookGrid";
 
 const BookShelf = ({ BookShelfTitle }) => {
     return (
@@ -6,6 +7,7 @@ const BookShelf = ({ BookShelfTitle }) => {
             <h2 className="bookshelf-title">{BookShelfTitle}</h2>
             <div className="bookshelf-books">
                 <ol className="books-grid">
+                    <BookGrid />
                     <li>
                         <div className="book">
                             <div className="book-top">
