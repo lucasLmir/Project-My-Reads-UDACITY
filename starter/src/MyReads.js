@@ -1,5 +1,6 @@
 import "./App.css";
 import { Link } from "react-router-dom";
+import BookShelf from "./BookShelf";
 
 const MyReads = () => {
 
@@ -10,6 +11,8 @@ const MyReads = () => {
             </div>
             <div className="list-books-content">
                 <div>
+                    <BookShelf BookShelfTitle={"Currently Reading"} />
+
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Currently Reading</h2>
                         <div className="bookshelf-books">
