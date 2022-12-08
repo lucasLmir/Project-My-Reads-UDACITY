@@ -1,6 +1,6 @@
 import "./App.css";
 
-const BookShelf = ({BookShelfTitle}) => {
+const BookShelf = ({ BookShelfTitle }) => {
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{BookShelfTitle}</h2>
