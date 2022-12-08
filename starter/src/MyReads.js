@@ -1,8 +1,7 @@
 import "./App.css";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MyReads = () => {
-    const [showSearchPage, setShowSearchpage] = useState(false);
 
     return (
         <div className="list-books">
@@ -251,7 +250,7 @@ const MyReads = () => {
                 </div>
             </div>
             <div className="open-search">
-                <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+                <Link to="/searchpage" >Add a book</Link>
             </div>
         </div>
     );
