@@ -1,8 +1,7 @@
 import "./App.css";
-import { useState } from "react";
 import MyReads from "./MyReads";
 import SearchPage from "./SearchPage";
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom";
 
 function App() {
 
