@@ -11,7 +11,7 @@ const MyReads = () => {
             </div>
             <div className="list-books-content">
                 <div>
-                    <BookShelf BookShelfTitle={"Currently Reading"} />
+                    <BookShelf />
 
                     <div className="bookshelf">
                         <h2 className="bookshelf-title">Currently Reading</h2>

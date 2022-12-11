@@ -1,8 +1,8 @@
 import "./App.css";
 import BookGrid from "./BookGrid";
 
-const BookShelf = ({ BookShelfTitle }) => {
-    const shelf = [
+const BookShelf = () => {
+    const shelfs = [
         {
             shelf: "currentlyReading",
             title: "Currently Reading"
@@ -18,14 +18,17 @@ const BookShelf = ({ BookShelfTitle }) => {
     ];
 
     return (
-        <div className="bookshelf">
-            <h2 className="bookshelf-title">{BookShelfTitle}</h2>
-            <div className="bookshelf-books">
-                <ol className="books-grid">
-                    <BookGrid />
-                </ol>
-            </div>
-        </div>);
+        shelfs.map((shelf) => (
+            <div key={shelf.shelf} className="bookshelf">
+                <h2 className="bookshelf-title">{shelf.title}</h2>
+                <div className="bookshelf-books">
+                    <ol className="books-grid">
+                        <BookGrid />
+                    </ol>
+                </div>
+            </div>)
+        )
+    );
 };
 
 export default BookShelf;
