@@ -1,7 +1,7 @@
 import "./App.css";
 import BookSelector from "./BookSelector";
 
-const Book = ({ BackgroundImage, BookTitle, BookAuthors }) => {
+const Book = ({ BackgroundImage, BookTitle, BookAuthors, shelf }) => {
     return (
         <li key={BookTitle}>
             <div className="book">
@@ -16,7 +16,7 @@ const Book = ({ BackgroundImage, BookTitle, BookAuthors }) => {
                         }}
                     ></div>
                     <div className="book-shelf-changer">
-                        <BookSelector />
+                        <BookSelector shelf={shelf} />
                     </div>
                 </div>
                 <div className="book-title">{BookTitle}</div>
