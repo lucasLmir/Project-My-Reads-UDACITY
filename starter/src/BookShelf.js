@@ -1,7 +1,7 @@
 import "./App.css";
 import BookGrid from "./BookGrid";
 
-const BookShelf = () => {
+const BookShelf = ({ bookList }) => {
     const shelfs = [
         {
             shelf: "currentlyReading",
@@ -17,17 +17,18 @@ const BookShelf = () => {
         },
     ];
 
+    const shelf = shelfs.map((shelf) => (
+        <div key={shelf.shelf} className="bookshelf">
+            <h2 className="bookshelf-title">{shelf.title}</h2>
+            <div className="bookshelf-books">
+                    {<BookGrid bookInThisShelfList = {bookList.filter(book => book.shelf === shelf.shelf)} />}
+            </div>
+        </div>)
+    )
+
+
     return (
-        shelfs.map((shelf) => (
-            <div key={shelf.shelf} className="bookshelf">
-                <h2 className="bookshelf-title">{shelf.title}</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        <BookGrid />
-                    </ol>
-                </div>
-            </div>)
-        )
+        <div>{shelf}</div>
     );
 };
 

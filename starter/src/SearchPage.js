@@ -3,9 +3,7 @@ import BookGrid from "./BookGrid";
 import { useState } from "react";
 import * as BooksAPI from "./BooksAPI";
 
-const SearchPage = () => {
-    const [bookList, setBookList] = useState([]);
-
+const SearchPage = ({ bookList, setBookList }) => {
     const [query, setQuery] = useState("");
 
     const updateQuery = (query) => {

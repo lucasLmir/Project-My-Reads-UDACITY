@@ -3,7 +3,7 @@ import BookSelector from "./BookSelector";
 
 const Book = ({ BackgroundImage, BookTitle, BookAuthors }) => {
     return (
-        <li>
+        <li key={BookTitle}>
             <div className="book">
                 <div className="book-top">
                     <div
