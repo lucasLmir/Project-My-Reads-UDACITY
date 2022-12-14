@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import BookGrid from "./BookGrid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as BooksAPI from "./BooksAPI";
 
 const SearchPage = ({ bookList, setBookList }) => {
     const [query, setQuery] = useState("");
+
 
     const updateQuery = (query) => {
         setQuery(query.trim());

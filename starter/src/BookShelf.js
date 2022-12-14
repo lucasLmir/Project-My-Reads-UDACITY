@@ -21,7 +21,7 @@ const BookShelf = ({ bookList }) => {
         <div key={shelf.shelf} className="bookshelf">
             <h2 className="bookshelf-title">{shelf.title}</h2>
             <div className="bookshelf-books">
-                    {<BookGrid bookInThisShelfList = {bookList.filter(book => book.shelf === shelf.shelf)} />}
+                    {<BookGrid bookList = {bookList.filter(book => book.shelf === shelf.shelf)} />}
             </div>
         </div>)
     )

@@ -1,8 +1,8 @@
 import "./App.css";
 import Book from "./Book";
 
-const BookGrid = ({ bookInThisShelfList }) => {
-    const books = bookInThisShelfList.map((b) => (
+const BookGrid = ({ bookList }) => {
+    const books = bookList.map((b) => (
         <Book
             key={b.title}
             BackgroundImage={b.imageLinks.thumbnail}
