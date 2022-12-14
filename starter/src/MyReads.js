@@ -1,8 +1,20 @@
 import "./App.css";
 import { Link } from "react-router-dom";
 import BookShelf from "./BookShelf";
+import { useEffect, useState } from "react";
+import * as BooksAPI from "./BooksAPI";
 
-const MyReads = ({bookList}) => {
+const MyReads = () => {
+    const [bookList, setBookList] = useState([]);
+
+    useEffect(() => {
+        const getBooks = async () => {
+            const res = await BooksAPI.getAll()
+            setBookList(res);
+        };
+  
+        getBooks();
+    }, []);
 
     return (
         <div className="list-books">
