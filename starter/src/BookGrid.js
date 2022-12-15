@@ -5,6 +5,7 @@ const BookGrid = ({ bookList, shelf }) => {
     const books = bookList.map((b) => (
         <Book
             key={b.id}
+            BookKey={b.id}
             BackgroundImage={b.imageLinks.thumbnail}
             BookTitle={b.title}
             BookAuthors={b.authors}
