@@ -7,14 +7,14 @@ const BookSelector = ({ shelf }) => {
                 Move to...
             </option>
             <option value="currentlyReading">
-                {shelf == "currentlyReading" && "✓ "}
+                {shelf === "currentlyReading" && "✓ "}
                 Currently Reading
             </option>
             <option value="wantToRead">
-                {shelf == "wantToRead" && "✓ "}
+                {shelf === "wantToRead" && "✓ "}
                 Want to Read</option>
             <option value="read">
-                {shelf == "read" && "✓ "}
+                {shelf === "read" && "✓ "}
                 Read</option>
             <option value="none">None</option>
         </select>
