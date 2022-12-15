@@ -8,16 +8,21 @@ const MyReads = () => {
     const [bookList, setBookList] = useState([]);
 
     useEffect(() => {
+        let unmounted = false;
+
         const getBooks = async () => {
-            const res = await BooksAPI.getAll()
-            if (!(res.hasOwnProperty('error'))) {
-                setBookList(res)
-            } else {
-                setBookList([])
-            }
+                const res = await BooksAPI.getAll()
+                if (!(res.hasOwnProperty('error'))|| unmounted) {
+                    setBookList(res)
+                } else {
+                    setBookList([])
+                }
         };
-  
+
         getBooks();
+        return () => {
+            unmounted = true;
+        };
     }, []);
 
     return (
@@ -27,7 +32,7 @@ const MyReads = () => {
             </div>
             <div className="list-books-content">
                 <div>
-                <BookShelf bookList={bookList}/>
+                    <BookShelf bookList={bookList} />
                 </div>
             </div>
             <div className="open-search">
