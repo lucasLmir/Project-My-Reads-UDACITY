@@ -1,6 +1,6 @@
 
 
-const BookSelector = ({ shelf }) => {
+const BookSelector = ({ shelf, BookKey }) => {
     return (
         <select>
             <option value="none" disabled>

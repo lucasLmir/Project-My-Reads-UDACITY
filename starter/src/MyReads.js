@@ -10,7 +10,11 @@ const MyReads = () => {
     useEffect(() => {
         const getBooks = async () => {
             const res = await BooksAPI.getAll()
-            setBookList(res);
+            if (!(res.hasOwnProperty('error'))) {
+                setBookList(res)
+            } else {
+                setBookList([])
+            }
         };
   
         getBooks();

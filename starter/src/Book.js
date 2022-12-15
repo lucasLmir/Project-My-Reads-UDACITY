@@ -2,7 +2,6 @@ import "./App.css";
 import BookSelector from "./BookSelector";
 
 const Book = ({ BackgroundImage, BookTitle, BookAuthors, shelf, BookKey }) => {
-    console.log(BookKey)
     return (
         <li key={BookKey}>
             <div className="book">
@@ -13,11 +12,11 @@ const Book = ({ BackgroundImage, BookTitle, BookAuthors, shelf, BookKey }) => {
                             width: 128,
                             height: 193,
                             backgroundImage:
-                                `url(${BackgroundImage})`,
+                                `url(${BackgroundImage})`
                         }}
                     ></div>
                     <div className="book-shelf-changer">
-                        <BookSelector shelf={shelf} />
+                        <BookSelector shelf={shelf} BookKey={BookKey} />
                     </div>
                 </div>
                 <div className="book-title">{BookTitle}</div>

@@ -10,12 +10,15 @@ const SearchPage = () => {
     const updateQuery = (query) => {
         setQuery(query.trim());
         query !== "" ? searchBook(query, 5) : setBookList([]);
-
     };
 
     const searchBook = async (query, maxResults) => {
         const res = await BooksAPI.search(query, maxResults);
-        setBookList(res);
+        if (!(res.hasOwnProperty('error'))) {
+            setBookList(res)
+        } else {
+            setBookList([])
+        }
     };
 
     return (
