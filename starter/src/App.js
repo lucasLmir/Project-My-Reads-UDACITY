@@ -1,7 +1,7 @@
 import "./App.css";
-import MyReads from "./MyReads";
 import SearchPage from "./SearchPage";
 import { Route, Routes } from "react-router-dom";
+import BookShelves from "./BookShelves";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route
           exact path="/" element={
-            <MyReads />
+            <BookShelves />
           }
         />
         <Route

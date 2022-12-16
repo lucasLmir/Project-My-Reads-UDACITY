@@ -2,7 +2,6 @@ import "./App.css";
 import Book from "./Book";
 
 const BookGrid = ({ bookList, shelf }) => {
-    console.log(bookList)
     const books = bookList.map((b) => (
         <Book
             key={b.id}
