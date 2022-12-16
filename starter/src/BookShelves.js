@@ -1,29 +1,31 @@
 import "./App.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import BookGrid from "./BookGrid";
 import * as BooksAPI from "./BooksAPI";
 
 const BookShelves = () => {
     const [bookList, setBookList] = useState([]);
 
-    const shelvesArray = [
-        {
-            shelf: "currentlyReading",
-            title: "Currently Reading",
-            books: []
-        },
-        {
-            shelf: "wantToRead",
-            title: "Want to Read",
-            books: []
-        },
-        {
-            shelf: "read",
-            title: "Read",
-            books: []
-        },
-    ];
+    const shelvesArray = useMemo(() => (
+        [
+            {
+                shelf: "currentlyReading",
+                title: "Currently Reading",
+                books: []
+            },
+            {
+                shelf: "wantToRead",
+                title: "Want to Read",
+                books: []
+            },
+            {
+                shelf: "read",
+                title: "Read",
+                books: []
+            },
+        ]
+    ), []);
 
     useEffect(() => {
         let unmounted = false;
@@ -31,24 +33,27 @@ const BookShelves = () => {
         const getBooks = async () => {
             const res = await BooksAPI.getAll()
             if (!(res.hasOwnProperty('error')) || unmounted) {
-                setBookList(res)
+                shelvesArray.map((s) => (
+                    s.books.push(res.filter(book => book.shelf === s.shelf))
+                    )
+                )
+                setBookList(shelvesArray);
             } else {
                 setBookList([])
             }
         };
-
         getBooks();
         return () => {
             unmounted = true;
         };
-    }, []);
+    }, [shelvesArray]);
 
-    const shelves = shelvesArray.map((s) => (
+    const shelves = bookList.map((s) => (
         <div key={s.shelf} className="bookshelf">
             <h2 className="bookshelf-title">{s.title}</h2>
             <div className="bookshelf-books">
                 {<BookGrid
-                    bookList={bookList.filter(book => book.shelf === s.shelf)}
+                    bookList={s.books[0]}
                     shelf={s.shelf}
                 />}
             </div>
