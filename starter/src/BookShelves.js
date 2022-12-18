@@ -28,30 +28,33 @@ const BookShelves = () => {
     ), []);
 
     const HandleChange = (event) => {
+        const shelf = event.target.value;
         const oldShelfId = bookList.findIndex(s =>
             s.shelf === event.target.getAttribute('data-shelf'));
         const newShelfId = bookList.findIndex(s =>
             s.shelf === event.target.value);
         const bookId = event.target.name;
         const book = bookList[oldShelfId].books.filter(b => b.id === bookId);
-        const newBookList = bookList
-        const oldShelfArray = bookList[oldShelfId].books.filter(s => s.id !== bookId);
+        const stageBookList = bookList
 
-        newBookList[oldShelfId].books = oldShelfArray
-
-        if (newShelfId !== -1) {
-            const newShelfArray = newBookList[newShelfId].books
-            newShelfArray.push(book[0])
-            newBookList[newShelfId].books = newShelfArray
+        if (oldShelfId !== -1) {
+            const oldShelfArray = bookList[oldShelfId].books.filter(s => s.id !== bookId);
+            stageBookList[oldShelfId].books = oldShelfArray
         }
 
+        if (newShelfId !== -1) {
+            const newShelfArray = stageBookList[newShelfId].books
+            newShelfArray.push(book[0])
+            stageBookList[newShelfId].books = newShelfArray
+        }
 
-        
+        const updateBook = async () => {
+            await BooksAPI.update(bookId, shelf);
+            console.log(shelf)
+        };
 
-
-        setBookList(setBookList)
-
-
+        updateBook();
+        setBookList(setBookList);
     }
 
     useEffect(() => {
@@ -63,10 +66,12 @@ const BookShelves = () => {
                 shelvesArray.map((s) => (
                     s.books.push(res.filter(book => book.shelf === s.shelf)
                     ))
-                )
-                shelvesArray.map((s) => {
+                );
+
+                shelvesArray.map((s) => (
                     s.books = s.books.flat(1)
-                })
+                ));
+
                 setBookList(shelvesArray);
             } else {
                 setBookList([])
