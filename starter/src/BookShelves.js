@@ -27,6 +27,24 @@ const BookShelves = () => {
         ]
     ), []);
 
+    const HandleChange = (event) => {
+        const oldShelfId = bookList.findIndex(s =>
+            s.shelf === event.target.getAttribute('data-shelf'));
+        const newShelf = event.target.value;
+        const bookId = event.target.name;
+        const newBookList = bookList
+
+        const newShelfArray = bookList[oldShelfId].books.filter(s => s.id !== bookId)
+        newBookList[oldShelfId].books = newShelfArray
+        console.log(oldShelfId)
+        console.log(newShelf)
+        console.log(bookId)
+        console.log(newShelfArray)
+        setBookList(setBookList)
+
+
+    }
+
     useEffect(() => {
         let unmounted = false;
 
@@ -34,9 +52,12 @@ const BookShelves = () => {
             const res = await BooksAPI.getAll()
             if (!(res.hasOwnProperty('error')) || unmounted) {
                 shelvesArray.map((s) => (
-                    s.books.push(res.filter(book => book.shelf === s.shelf))
-                    )
+                    s.books.push(res.filter(book => book.shelf === s.shelf)
+                    ))
                 )
+                shelvesArray.map((s) => {
+                    s.books = s.books.flat(1)
+                })
                 setBookList(shelvesArray);
             } else {
                 setBookList([])
@@ -48,13 +69,14 @@ const BookShelves = () => {
         };
     }, [shelvesArray]);
 
-    const shelves = bookList.map((s) => (
+    const shelves = bookList?.map((s) => (
         <div key={s.shelf} className="bookshelf">
             <h2 className="bookshelf-title">{s.title}</h2>
             <div className="bookshelf-books">
                 {<BookGrid
-                    bookList={s.books[0]}
+                    bookList={s.books}
                     shelf={s.shelf}
+                    onChange={HandleChange}
                 />}
             </div>
         </div>)

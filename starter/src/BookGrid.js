@@ -1,8 +1,8 @@
 import "./App.css";
 import Book from "./Book";
 
-const BookGrid = ({ bookList, shelf }) => {
-    const books = bookList.map((b) => (
+const BookGrid = ({ bookList, shelf, onChange}) => {
+    const books = bookList?.map((b) => (
         <Book
             key={b.id}
             BookKey={b.id}
@@ -10,7 +10,9 @@ const BookGrid = ({ bookList, shelf }) => {
             BookTitle={b.title}
             BookAuthors={b.authors}
             shelf={shelf}
+            onChange={onChange}
         />
+        
     ));
 
     return (

@@ -1,15 +1,16 @@
 
 
-const BookSelector = ({ shelf, BookKey }) => {
+const BookSelector = ({ shelf, BookKey, onChange }) => {
     return (
-        <select>
-            <option value="none" disabled>
+        <select data-shelf={shelf} name={BookKey} onChange={onChange} >
+            <option value="none" disabled >
                 Move to...
             </option>
-            <option value="currentlyReading">
+            <option hidden></option>
+
+            <option value="currentlyReading" >
                 {shelf === "currentlyReading" && "✓ "}
-                Currently Reading
-            </option>
+                Currently Reading</option>
             <option value="wantToRead">
                 {shelf === "wantToRead" && "✓ "}
                 Want to Read</option>
