@@ -30,16 +30,25 @@ const BookShelves = () => {
     const HandleChange = (event) => {
         const oldShelfId = bookList.findIndex(s =>
             s.shelf === event.target.getAttribute('data-shelf'));
-        const newShelf = event.target.value;
+        const newShelfId = bookList.findIndex(s =>
+            s.shelf === event.target.value);
         const bookId = event.target.name;
+        const book = bookList[oldShelfId].books.filter(b => b.id === bookId);
         const newBookList = bookList
+        const oldShelfArray = bookList[oldShelfId].books.filter(s => s.id !== bookId);
 
-        const newShelfArray = bookList[oldShelfId].books.filter(s => s.id !== bookId)
-        newBookList[oldShelfId].books = newShelfArray
-        console.log(oldShelfId)
-        console.log(newShelf)
-        console.log(bookId)
-        console.log(newShelfArray)
+        newBookList[oldShelfId].books = oldShelfArray
+
+        if (newShelfId !== -1) {
+            const newShelfArray = newBookList[newShelfId].books
+            newShelfArray.push(book[0])
+            newBookList[newShelfId].books = newShelfArray
+        }
+
+
+        
+
+
         setBookList(setBookList)
 
 
