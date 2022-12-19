@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import BookGrid from "./BookGrid";
 
-const SearchPage = ({ bookList, onChange, query, updateQuery }) => {
+const SearchPage = ({ bookList, onChange, query, updateQuery, getBooks }) => {
 
     return (
         <div className="search-books">
             <div className="search-books-bar">
                 <Link
+                    onClick={getBooks}
                     className="close-search"
                     to="/"
                 >

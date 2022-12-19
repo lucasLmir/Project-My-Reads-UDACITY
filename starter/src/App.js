@@ -2,39 +2,40 @@ import "./App.css";
 import SearchPage from "./SearchPage";
 import { Route, Routes } from "react-router-dom";
 import BookShelves from "./BookShelves";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
 
 function App() {
   const [bookList, setBookList] = useState([]);
 
-  const shelvesArray = useMemo(() => (
-    [
-      {
-        shelf: "currentlyReading",
-        title: "Currently Reading",
-        books: []
-      },
-      {
-        shelf: "wantToRead",
-        title: "Want to Read",
-        books: []
-      },
-      {
-        shelf: "read",
-        title: "Read",
-        books: []
-      },
-    ]
-  ), []);
+  const getBooks = async () => {
+    const res = await BooksAPI.getAll()
+    if (!(res.hasOwnProperty('error'))) {
+      setBookList(res);
+    } else {
+      setBookList([])
+    }
+  };
+
+  useEffect(() => {
+    let unmounted = false;
+    
+    !unmounted && getBooks();
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
   const HandleChange = (event) => {
     const shelf = event.target.value;
+    const bookId = event.target.name;
+
+    /*
     const oldShelfId = bookList.findIndex(s =>
       s.shelf === event.target.getAttribute('data-shelf'));
     const newShelfId = bookList.findIndex(s =>
       s.shelf === event.target.value);
-    const bookId = event.target.name;
+    
     const book = bookList[oldShelfId].books.filter(b => b.id === bookId);
     const stageBookList = bookList
 
@@ -48,40 +49,19 @@ function App() {
       newShelfArray.push(book[0])
       stageBookList[newShelfId].books = newShelfArray
     }
+    */
+    
 
     const updateBook = async () => {
       await BooksAPI.update({ id: bookId }, shelf);
+      const book = await BooksAPI.get(bookId)
+      book.shelf = shelf;
+      setBookList(bookList.filter(b => b.id !== bookId).concat(book));
     };
 
     updateBook();
-    setBookList(setBookList);
   }
 
-  useEffect(() => {
-    let unmounted = false;
-
-    const getBooks = async () => {
-      const res = await BooksAPI.getAll()
-      if (!(res.hasOwnProperty('error')) || unmounted) {
-        shelvesArray.map((s) => (
-          s.books.push(res.filter(book => book.shelf === s.shelf)
-          ))
-        );
-
-        shelvesArray.map((s) => (
-          s.books = s.books.flat(1)
-        ));
-
-        setBookList(shelvesArray);
-      } else {
-        setBookList([])
-      }
-    };
-    getBooks();
-    return () => {
-      unmounted = true;
-    };
-  }, [shelvesArray]);
 
   const [query, setQuery] = useState("");
 
@@ -124,6 +104,8 @@ function App() {
               onChange={HandleChange}
               updateQuery={updateQuery}
               query={query}
+              getBooks={getBooks}
+
             />
           }
         />

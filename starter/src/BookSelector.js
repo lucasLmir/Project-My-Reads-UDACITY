@@ -2,12 +2,10 @@
 
 const BookSelector = ({ shelf, BookKey, onChange }) => {
     return (
-        <select data-shelf={shelf} name={BookKey} onChange={onChange} >
+        <select value={shelf} name={BookKey} onChange={onChange} >
             <option value="none" disabled >
                 Move to...
             </option>
-            <option hidden></option>
-
             <option value="currentlyReading" >
                 {shelf === "currentlyReading" && "✓ "}
                 Currently Reading</option>

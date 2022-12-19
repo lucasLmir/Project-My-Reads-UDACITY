@@ -3,14 +3,30 @@ import { Link } from "react-router-dom";
 import BookGrid from "./BookGrid";
 
 
-const BookShelves = ({ bookList, onChange, resetBookList}) => {
+const BookShelves = ({ bookList, onChange, resetBookList }) => {
 
-    const shelves = bookList?.map((s) => (
+
+    const shelvesArray = [
+        {
+            shelf: "currentlyReading",
+            title: "Currently Reading"
+        },
+        {
+            shelf: "wantToRead",
+            title: "Want to Read"
+        },
+        {
+            shelf: "read",
+            title: "Read"
+        },
+    ];
+
+    const shelves = shelvesArray.map((s) => (
         <div key={s.shelf} className="bookshelf">
             <h2 className="bookshelf-title">{s.title}</h2>
             <div className="bookshelf-books">
                 {<BookGrid
-                    bookList={s.books}
+                    bookList={bookList.filter(b => b.shelf === s.shelf)}
                     shelf={s.shelf}
                     onChange={onChange}
                 />}
