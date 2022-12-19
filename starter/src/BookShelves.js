@@ -49,8 +49,7 @@ const BookShelves = () => {
         }
 
         const updateBook = async () => {
-            await BooksAPI.update(bookId, shelf);
-            console.log(shelf)
+            await BooksAPI.update({ id: bookId }, shelf);
         };
 
         updateBook();
