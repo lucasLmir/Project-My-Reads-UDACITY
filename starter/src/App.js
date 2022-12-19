@@ -43,7 +43,7 @@ function App() {
   const [query, setQuery] = useState("");
 
   const updateQuery = (query) => {
-      setQuery(query.trim());
+      setQuery(query);
       query !== "" ? searchBook(query, 20) : setBookList([]);
   };
 
