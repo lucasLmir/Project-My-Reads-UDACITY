@@ -1,25 +1,7 @@
 import { Link } from "react-router-dom";
 import BookGrid from "./BookGrid";
-import { useState } from "react";
-import * as BooksAPI from "./BooksAPI";
 
-const SearchPage = () => {
-    const [bookList, setBookList] = useState([]);
-    const [query, setQuery] = useState("");
-
-    const updateQuery = (query) => {
-        setQuery(query.trim());
-        query !== "" ? searchBook(query, 5) : setBookList([]);
-    };
-
-    const searchBook = async (query, maxResults) => {
-        const res = await BooksAPI.search(query, maxResults);
-        if (!(res.hasOwnProperty('error'))) {
-            setBookList(res)
-        } else {
-            setBookList([])
-        }
-    };
+const SearchPage = ({ bookList, onChange, query, updateQuery }) => {
 
     return (
         <div className="search-books">
@@ -40,7 +22,10 @@ const SearchPage = () => {
                 </div>
             </div>
             <div className="search-books-results">
-                <BookGrid bookList={bookList} />
+                <BookGrid
+                    bookList={bookList}
+                    onChange={onChange}
+                />
             </div>
         </div>
     );
