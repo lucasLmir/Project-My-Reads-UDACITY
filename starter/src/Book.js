@@ -1,7 +1,7 @@
 import "./App.css";
 import BookSelector from "./BookSelector";
 
-const Book = ({ BackgroundImage, BookTitle, BookAuthors, shelf, BookKey, onChange }) => {
+const Book = ({ BackgroundImage, BookTitle, BookAuthors, BookKey, onChange, shelf }) => {
     return (
         <li key={BookKey}>
             <div className="book">

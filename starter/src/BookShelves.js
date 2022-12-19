@@ -27,7 +27,6 @@ const BookShelves = ({ bookList, onChange, resetBookList }) => {
             <div className="bookshelf-books">
                 {<BookGrid
                     bookList={bookList.filter(b => b.shelf === s.shelf)}
-                    shelf={s.shelf}
                     onChange={onChange}
                 />}
             </div>
